@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Hipotecario PRO</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+<style>
+body{margin:0;font-family:'Poppins',sans-serif;background:#ffffff;color:#0A3D91}
+.container{max-width:520px;margin:auto;padding:20px}
+.card{background:#fff;border-radius:20px;padding:25px;box-shadow:0 10px 30px rgba(0,0,0,.1);text-align:center}
+h1{font-size:22px}
+.progress{height:6px;background:#eee;border-radius:10px;margin-bottom:20px}
+.progress-bar{height:100%;width:10%;background:#FFC300;transition:.4s}
+.option{border:2px solid #0A3D91;padding:14px;border-radius:12px;margin-top:10px;cursor:pointer;transition:.3s}
+.option:hover{background:#0A3D91;color:#fff}
+input{width:100%;padding:12px;margin-top:10px;border-radius:10px;border:1px solid #ccc}
+.btn{display:block;margin-top:15px;padding:15px;border-radius:30px;background:#0A3D91;color:#fff;text-decoration:none;font-weight:600}
+.hidden{display:none}
+.info{font-size:13px;color:#777;margin-top:15px}
+.lottie{width:120px;margin:auto}
+#result{display:none}
+</style>
+</head>
+<body>
+
+<div class="container">
+<div class="card">
+
+<div class="progress"><div class="progress-bar" id="bar"></div></div>
+
+<!-- STEP 1 -->
+<div id="step1">
+<div id="anim1" class="lottie"></div>
+<h1>¿Pagas tu casa pero sientes que la deuda no baja?</h1>
+<div class="option" onclick="next(2)">Iniciar diagnóstico</div>
+<p class="info">⏱️ Solo te tomará 2 minutos • Diagnóstico 100% gratuito</p>
+</div>
+
+<!-- STEP 2 -->
+<div id="step2" class="hidden">
+<div id="anim2" class="lottie"></div>
+<h1>¿Cuántos años llevas pagando?</h1>
+<div class="option" onclick="next(3)">Menos de 5 años</div>
+<div class="option" onclick="next(3)">5 a 10 años</div>
+<div class="option" onclick="next(3)">Más de 10 años</div>
+<p class="info">Entre más tiempo llevas pagando, mayor es la oportunidad de optimizar tu crédito.</p>
+</div>
+
+<!-- STEP 3 -->
+<div id="step3" class="hidden">
+<div id="anim3" class="lottie"></div>
+<h1>¿Hasta la fecha, qué tanto te ha bajado la deuda?</h1>
+<div class="option" onclick="next(4)">No ha bajado prácticamente nada</div>
+<div class="option" onclick="next(4)">Ha bajado muy poco</div>
+<div class="option" onclick="next(4)">Ha bajado de forma normal</div>
+<div class="option" onclick="next(4)">No estoy seguro</div>
+<p class="info">Gran parte de tu cuota se destina a intereses y no a capital.</p>
+</div>
+
+<!-- STEP 4 -->
+<div id="step4" class="hidden">
+<div id="anim4" class="lottie"></div>
+<h1>¿Sabías esto sobre la Ley 546/1999?</h1>
+<div class="option" onclick="next(5)">No sabía</div>
+<div class="option" onclick="next(5)">Quiero saber más</div>
+<div class="option" onclick="next(5)">Sí sabía</div>
+<p class="info">La Ley 546/1999 permite reducir años sin penalidades.</p>
+</div>
+
+<!-- STEP 5 -->
+<div id="step5" class="hidden">
+<div id="anim5" class="lottie"></div>
+<h1>Si te muestro que puedes reducir tu crédito de 30 a 5 años, ¿te interesa?</h1>
+<div class="option" onclick="next(6)">Sí, totalmente</div>
+<div class="option" onclick="next(6)">Quiero ver números</div>
+<div class="option" onclick="next(6)">Depende</div>
+<p class="info">Pequeños cambios pueden ahorrarte millones.</p>
+</div>
+
+<!-- STEP 6 NUEVO -->
+<div id="step6" class="hidden">
+<div id="anim6" class="lottie"></div>
+<h1>¿Qué tipo de crédito tienes?</h1>
+<div class="option" onclick="next(7)">UVR</div>
+<div class="option" onclick="next(7)">Pesos</div>
+<div class="option" onclick="next(7)">No estoy seguro</div>
+<p class="info">El tipo de crédito influye en cómo optimizar tu hipoteca.</p>
+</div>
+
+<!-- STEP 7 NUEVO -->
+<div id="step7" class="hidden">
+<div id="anim7" class="lottie"></div>
+<h1>¿Estás al día con tus pagos?</h1>
+<div class="option" onclick="next(8)">Sí, al día</div>
+<div class="option" onclick="next(8)">Tengo retrasos</div>
+<p class="info">Estar al día permite aplicar más estrategias.</p>
+</div>
+
+<!-- STEP 8 NUEVO -->
+<div id="step8" class="hidden">
+<div id="anim8" class="lottie"></div>
+<h1>¿Qué tanto te preocupa tu crédito?</h1>
+<div class="option" onclick="next(9)">Mucho</div>
+<div class="option" onclick="next(9)">Algo</div>
+<div class="option" onclick="next(9)">Poco</div>
+<p class="info">Entre mayor preocupación, mayor impacto tendrá la optimización.</p>
+</div>
+
+<!-- STEP 9 DATOS -->
+<div id="step9" class="hidden">
+<div id="anim9" class="lottie"></div>
+<h1>Datos para tu diagnóstico</h1>
+<input id="nombre" placeholder="Nombre completo">
+<input id="telefono" placeholder="WhatsApp">
+<input id="correo" placeholder="Correo electrónico">
+<input id="ciudad" placeholder="Ciudad">
+<input id="banco" placeholder="Banco">
+<div class="option" onclick="finish()">Obtener diagnóstico</div>
+<p class="info">🔒 Tu información es confidencial y solo se usará para tu asesoría.</p>
+</div>
+
+<!-- RESULT -->
+<div id="result">
+<div id="anim10" class="lottie"></div>
+<h1>¡Felicidades! Hay una gran oportunidad para ti</h1>
+<p>Según tus respuestas, puedes reducir tu crédito y ahorrar millones aplicando la Ley 546/1999.</p>
+<a id="waBtn" class="btn" target="_blank">📲 Obtener asesoría gratuita por WhatsApp</a>
+<a class="btn" href="https://instagram.com/libianarvaez_vivienda" target="_blank">Instagram</a>
+<p class="info">Recibe tu cálculo personalizado.</p>
+</div>
+
+</div>
+</div>
+
+<script>
+const totalSteps = 9;
+
+function next(step){
+ document.querySelectorAll('[id^="step"]').forEach(e=>e.classList.add('hidden'));
+ document.getElementById('step'+step).classList.remove('hidden');
+ let progress = (step / totalSteps) * 100;
+ document.getElementById('bar').style.width = progress + '%';
+ document.getElementById('result').style.display='none';
+}
+
+function finish(){
+ const nombre=document.getElementById('nombre').value;
+ const telefono=document.getElementById('telefono').value;
+ const correo=document.getElementById('correo').value;
+ const ciudad=document.getElementById('ciudad').value;
+ const banco=document.getElementById('banco').value;
+
+ const msg=`Hola, ya hice el diagnóstico.\nNombre:${nombre}\nTeléfono:${telefono}\nCorreo:${correo}\nCiudad:${ciudad}\nBanco:${banco}`;
+
+ document.getElementById('waBtn').href=`https://wa.me/573024258722?text=${encodeURIComponent(msg)}`;
+ document.querySelectorAll('[id^="step"]').forEach(e=>e.style.display='none');
+ document.getElementById('result').style.display='block';
+}
+
+// Animaciones
+const anims=[
+'lf20_tfb3estd.json','lf20_qp1q7mct.json','lf20_9wpyhdzo.json','lf20_yyja2k.json','lf20_jcikwtux.json','lf20_usmfx6bp.json','lf20_kkflmtur.json','lf20_t9gkkhz4.json','lf20_qp1q7mct.json','lf20_jcikwtux.json'
+];
+
+anims.forEach((a,i)=>{
+ lottie.loadAnimation({container:document.getElementById('anim'+(i+1)),renderer:'svg',loop:true,autoplay:true,path:`https://assets2.lottiefiles.com/packages/${a}`});
+});
+</script>
+
+</body>
+</html>
